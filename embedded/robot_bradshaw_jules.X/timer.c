@@ -1,7 +1,7 @@
 #include <xc.h>
 #include "timer.h"
 #include "IO.h"
-
+#include "PWM.h"
 //Initialisation d?un timer 32 bits
 
 unsigned char toggle=0;
@@ -24,10 +24,10 @@ void InitTimer23(void) {
 
 //Interruption du timer 32 bits sur 2-3
 
-void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
+/*void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
     IFS0bits.T3IF = 0; // Clear Timer3 Interrupt Flag
     LED_ORANGE = !LED_ORANGE;
-}
+}*/
 
 //Initialisation d?un timer 16 bits
 
@@ -52,4 +52,21 @@ void InitTimer1(void) {
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits.T1IF = 0;
     LED_BLANCHE = !LED_BLANCHE;
+}
+
+// I n t e r r u p t i o n du time r 32 b i t s s u r 2?3
+void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(void) {
+IFS0bits.T3IF = 0 ; // Cle a r Timer3 I n t e r r u p t Flag
+if (toggle == 0 )
+{
+       PWMSetSpeed (20 , MOTEUR_DROIT);
+       PWMSetSpeed (20 , MOTEUR_GAUCHE);
+       toggle = 1;
+}
+else
+{
+        PWMSetSpeed(-20 , MOTEUR_DROIT);
+        PWMSetSpeed(-20 , MOTEUR_GAUCHE);
+        toggle = 0;
+}
 }
