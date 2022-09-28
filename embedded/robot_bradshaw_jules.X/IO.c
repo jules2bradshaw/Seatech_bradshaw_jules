@@ -43,11 +43,14 @@ void InitIO()
     _TRISG6 = 0; //LED Blanche
 
     _TRISG7 = 0; // LED Bleue
-
+    
     
 
     // Moteurs 
-
+    _TRISB14 = 0; //pin hacheur moteur
+    
+    _TRISB15 = 0; // pin hacheur moteur
+    
 
 
     //********** Configuration des entrées : _TRISxx = 1 ********************************   
