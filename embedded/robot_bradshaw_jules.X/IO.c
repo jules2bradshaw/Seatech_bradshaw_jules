@@ -47,9 +47,12 @@ void InitIO()
     
 
     // Moteurs 
-    _TRISB14 = 0; //pin hacheur moteur
-    
+    _TRISB14 = 0; //pin hacheur moteur    
     _TRISB15 = 0; // pin hacheur moteur
+    
+    // rampe de vitesse
+    _TRISC6 = 0;  //pin hacheur moteur 6
+    _TRISC7 = 0;  //pin hacheur moteur 6
     
 
 

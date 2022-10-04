@@ -4,13 +4,14 @@
 #include "PWM.h"
 //Initialisation d?un timer 32 bits
 
-unsigned char toggle=0;
+unsigned char toggle = 0;
+
 void InitTimer23(void) {
     T3CONbits.TON = 0; // Stop any 16-bit Timer3 operation
     T2CONbits.TON = 0; // Stop any 16/32-bit Timer3 operation
     T2CONbits.T32 = 1; // Enable 32-bit Timer mode
     T2CONbits.TCS = 0; // Select internal instruction cycle clock
-    T2CONbits.TCKPS = 0b01; // Select 1:1 Prescaler
+    T2CONbits.TCKPS = 0b00; // Select 1:1 Prescaler
     TMR3 = 0x00; // Clear 32-bit Timer (msw)
     TMR2 = 0x00; // Clear 32-bit Timer (lsw)
     PR3 = 0x04C4; // Load 32-bit period value (msw)
@@ -23,11 +24,22 @@ void InitTimer23(void) {
 }
 
 //Interruption du timer 32 bits sur 2-3
+// I n t e r r u p t i o n du time r 32 b i t s s u r 2?3
 
-/*void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
-    IFS0bits.T3IF = 0; // Clear Timer3 Interrupt Flag
+void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
+    IFS0bits.T3IF = 0; // Cle a r Timer3 I n t e r r u p t Flag
     LED_ORANGE = !LED_ORANGE;
-}*/
+    if (toggle == 0) {
+        PWMSetSpeedConsigne(20, MOTEUR_DROIT);
+        PWMSetSpeedConsigne(20, MOTEUR_GAUCHE);
+        toggle = 1;
+    } else {
+        PWMSetSpeedConsigne(-20, MOTEUR_DROIT);
+        PWMSetSpeedConsigne(-20, MOTEUR_GAUCHE);
+        toggle = 0;
+    }
+}
+
 
 //Initialisation d?un timer 16 bits
 
@@ -52,21 +64,6 @@ void InitTimer1(void) {
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits.T1IF = 0;
     LED_BLANCHE = !LED_BLANCHE;
+    PWMUpdateSpeed();
 }
 
-// I n t e r r u p t i o n du time r 32 b i t s s u r 2?3
-void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(void) {
-IFS0bits.T3IF = 0 ; // Cle a r Timer3 I n t e r r u p t Flag
-if (toggle == 0 )
-{
-       PWMSetSpeed (20 , MOTEUR_DROIT);
-       PWMSetSpeed (20 , MOTEUR_GAUCHE);
-       toggle = 1;
-}
-else
-{
-        PWMSetSpeed(-20 , MOTEUR_DROIT);
-        PWMSetSpeed(-20 , MOTEUR_GAUCHE);
-        toggle = 0;
-}
-}

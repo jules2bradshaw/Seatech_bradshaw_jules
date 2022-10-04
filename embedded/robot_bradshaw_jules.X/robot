@@ -1,0 +1,76 @@
+make -f nbproject/Makefile-default.mk SUBPROJECTS= .build-conf
+make[1]: Entering directory 'C:/Github/Seatech_bradshaw_jules/embedded/robot_bradshaw_jules.X'
+make  -f nbproject/Makefile-default.mk dist/default/debug/robot_bradshaw_jules.X.debug.elf
+make[2]: Entering directory 'C:/Github/Seatech_bradshaw_jules/embedded/robot_bradshaw_jules.X'
+"C:\Program Files\Microchip\xc16\v2.00\bin\xc16-gcc.exe"   -o dist/default/debug/robot_bradshaw_jules.X.debug.elf  build/default/debug/main.o build/default/debug/ChipConfig.o build/default/debug/IO.o build/default/debug/timer.o build/default/debug/robot.o build/default/debug/ToolBox.o build/default/debug/PWM.o      -mcpu=33EP512GM306        -D__DEBUG=__DEBUG -D__MPLAB_DEBUGGER_ICD4=1  -omf=elf -DXPRJ_default=default       -mreserve=data@0x1000:0x101B -mreserve=data@0x101C:0x101D -mreserve=data@0x101E:0x101F -mreserve=data@0x1020:0x1021 -mreserve=data@0x1022:0x1023 -mreserve=data@0x1024:0x1027 -mreserve=data@0x1028:0x104F   -Wl,--local-stack,,--defsym=__MPLAB_BUILD=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,-D__DEBUG=__DEBUG,--defsym=__MPLAB_DEBUGGER_ICD4=1,,--script=p33EP512GM306.gld,--stack=16,--check-sections,--data-init,--pack-data,--handles,--isr,--no-gc-sections,--fill-upper=0,--stackguard=16,--no-force-link,--smart-io,-Map="dist/default/debug/robot_bradshaw_jules.X.debug.map",--report-mem,--memorysummary,dist/default/debug/memoryfile.xml  -mdfp="C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16" 
+build/default/debug/timer.o(.isr.text+0x44): In function `__T3Interrupt':
+: undefined reference to `_PWMSetSpeed'
+build/default/debug/timer.o(.isr.text+0x4c): In function `__T3Interrupt':
+: undefined reference to `_PWMSetSpeed'
+build/default/debug/timer.o(.isr.text+0x5a): In function `.L5':
+: undefined reference to `_PWMSetSpeed'
+build/default/debug/timer.o(.isr.text+0x62): In function `.L5':
+: undefined reference to `_PWMSetSpeed'
+build/default/debug/main.o(.text+0x18): In function `_main':
+
+
+: undefined reference to `_PWMSetSpeed'
+
+xc16-ld 2.00 (B)
+Info: Loading file: C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16/bin/../support/dsPIC33E/gld\\p33EP512GM306.gld
+make[2]: *** [dist/default/debug/robot_bradshaw_jules.X.debug.elf] Error 255
+
+make[1]: *** [.build-conf] Error 2
+make: *** [.build-impl] Error 2
+Default Code Model: Small
+Default Data Model: Large
+Default Scalar Model: Small
+
+"program" Memory  [Origin = 0x200, Length = 0x555ec]
+
+section                    address   length (PC units)   length (bytes) (dec)
+-------                    -------   -----------------   --------------------
+.text                        0x200               0x99c           0xe6a  (3690)
+.text                        0xb9c               0x38e           0x555  (1365)
+.dinit                       0xf2a                0x1c            0x2a  (42)
+
+                 Total "program" memory used (bytes):         0x13e9  (5097) <1%
+
+
+"data" Memory  [Origin = 0x1000, Length = 0xc000]
+
+section                    address      alignment gaps    total length  (dec)
+-------                    -------      --------------    -------------------
+reserve_data_0x1000         0x1000                0x1c            0x1c  (28)
+reserve_data_0x101c         0x101c                 0x2             0x2  (2)
+reserve_data_0x101e         0x101e                 0x2             0x2  (2)
+reserve_data_0x1020         0x1020                 0x2             0x2  (2)
+reserve_data_0x1022         0x1022                 0x2             0x2  (2)
+reserve_data_0x1024         0x1024                 0x4             0x4  (4)
+reserve_data_0x1028         0x1028                0x28            0x28  (40)
+.nbss                       0x1050                   0             0x2  (2)
+.ndata                      0x1052                   0             0x2  (2)
+.nbss                       0x1054                   0             0x2  (2)
+.bss                        0x1056                   0            0x16  (22)
+
+                 Total "data" memory used (bytes):           0x6c  (108) <1%
+
+
+Dynamic Memory Usage
+
+region                     address                      maximum length  (dec)
+------                     -------                      ---------------------
+heap                             0                                   0  (0)
+stack                       0x106c                              0xbf94  (49044)
+
+                 Maximum dynamic memory (bytes):         0xbf94  (49044)
+
+Info: Project is using a large data memory model when small data memory model is sufficient.
+
+nbproject/Makefile-default.mk:201: recipe for target 'dist/default/debug/robot_bradshaw_jules.X.debug.elf' failed
+make[2]: Leaving directory 'C:/Github/Seatech_bradshaw_jules/embedded/robot_bradshaw_jules.X'
+nbproject/Makefile-default.mk:91: recipe for target '.build-conf' failed
+make[1]: Leaving directory 'C:/Github/Seatech_bradshaw_jules/embedded/robot_bradshaw_jules.X'
+nbproject/Makefile-impl.mk:39: recipe for target '.build-impl' failed
+
+BUILD FAILED (exit value 2, total time: 367ms)
