@@ -29,7 +29,7 @@ int main(void) {
     /****************************************************************************************************/
     InitIO();
 
-    InitTimer23();
+    //InitTimer23();
     InitTimer1(250);
     InitTimer4(250);
     InitPWM();
@@ -45,15 +45,15 @@ int main(void) {
             ADCClearConversionFinishedFlag();
             unsigned int *Result = ADCGetResult();
 
-            float volts = ((float) Result[2])*3.3 / 4096 * 3.2;
+            float volts = ((float) Result[0])*3.3 / 4096 * 3.2;
             robotState.distanceTelemetreDroit = 34 / volts - 5;
             volts = ((float) Result[1])* 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreCentre = 34 / volts - 5;
-            volts = ((float) Result[0])* 3.3 / 4096 * 3.2;
+            volts = ((float) Result[2])* 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreGauche = 34 / volts - 5;
 
             ADCValues1 = Result[0];
-            if (robotState.distanceTelemetreGauche < 30) LED_ORANGE = 1;
+            if (robotState.distanceTelemetreDroit < 30) LED_ORANGE = 1;
             else LED_ORANGE = 0;
 
             ADCValues2 = Result[1];
@@ -62,7 +62,7 @@ int main(void) {
 
 
             ADCValues3 = Result[2];
-            if (robotState.distanceTelemetreDroit < 30) LED_BLANCHE = 1;
+            if (robotState.distanceTelemetreGauche < 30) LED_BLANCHE = 1;
             else LED_BLANCHE = 0;
 
 
