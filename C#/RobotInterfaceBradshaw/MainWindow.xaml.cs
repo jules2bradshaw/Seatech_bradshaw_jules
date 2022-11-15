@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace RobotInterfaceBradshaw
 {
     /// <summary>
@@ -32,11 +33,7 @@ namespace RobotInterfaceBradshaw
 
         private void buttonEnvoyer_Click(object sender, RoutedEventArgs e)
         {
-            this.RichTextBox.Text += "reçu : " + this.textBoxEmission.Text + "\n";
-            for 
-
-
-
+             
             if (buttonEnvoyer.Background == Brushes.Beige) {
                 buttonEnvoyer.Background = Brushes.RoyalBlue;
             }
@@ -45,6 +42,20 @@ namespace RobotInterfaceBradshaw
                 buttonEnvoyer.Background = Brushes.Beige;
             }
         }
+        private void SendMessage()
+        {
+            textBoxReception.Text += "reçu : " + textBoxEmission.Text + "\n";
+            textBoxEmission.Text = "";
+        }
+
+        private void textBoxEmission_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter )
+            {
+                SendMessage();
+            }
+        }
     }
+
    
 }
