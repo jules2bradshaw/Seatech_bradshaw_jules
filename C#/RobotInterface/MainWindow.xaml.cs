@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace RobotInterfaceYannMasinski
+namespace RobotInterfaceBradshawJules
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -31,7 +31,7 @@ namespace RobotInterfaceYannMasinski
         public MainWindow()
         {
             InitializeComponent();
-            serialPort1= new ReliableSerialPort("COM7", 115200, Parity.None, 8, StopBits.One );
+            serialPort1= new ReliableSerialPort("COM4", 115200, Parity.None, 8, StopBits.One );
             serialPort1.DataReceived += serialPort1_DataReceived;
             serialPort1.Open();
 
