@@ -34,13 +34,15 @@ namespace RobotInterfaceBradshawJules
             serialPort1= new ReliableSerialPort("COM4", 115200, Parity.None, 8, StopBits.One );
             serialPort1.DataReceived += serialPort1_DataReceived;
             serialPort1.Open();
+            byteListeReceived();
 
-            robot = new Robot();
+            Robot robot = new Robot();
 
             timerAffichage= new DispatcherTimer();
             timerAffichage.Interval = new TimeSpan(0, 0, 0, 0, 100);
             timerAffichage.Tick += TimerAffichage_Tick; ;
             timerAffichage.Start();
+
 
         }
 
@@ -50,12 +52,18 @@ namespace RobotInterfaceBradshawJules
             {
                 Reception.Text += "Reçu Robot : " + robot.receivedText + "\n";
                 robot.receivedText = "";
+                Queue.enqueue(number);
             }
         }
 
         public void serialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
             robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            Console.WriteLine("\nContents of the first copy:");
+            foreach (byte number in byteListReceived)
+            {
+                Console.WriteLine(number);
+            }
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -99,6 +107,7 @@ namespace RobotInterfaceBradshawJules
             //Reception.Text += "Reçu : " + textBoxEmission.Text + "\n";
             serialPort1.WriteLine(textBoxEmission.Text);
             textBoxEmission.Text = "";
+            byteToString();
         }
 
     }

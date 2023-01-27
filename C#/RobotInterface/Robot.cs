@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RobotInterfaceYannMasinski
+namespace RobotInterfaceBradshawJules
 {
     public class Robot
     {
+        Queue<byte> byteListReceived = new Queue<byte>();
         public string receivedText = "" ;
         public float distancetelementreDroit;
         public float distancetelementreCentre;
