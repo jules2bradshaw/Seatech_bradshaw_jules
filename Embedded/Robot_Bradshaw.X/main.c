@@ -38,8 +38,10 @@ int main(void) {
     /****************************************************************************************************/
     while (1) {
         
-        SendMessageDirect((unsigned char*) "Bonjour", 7);
-            __delay32(40000000);
+          //SendMessageDirect((unsigned char*) "Bonjour", 7);
+          //  __delay32(40000000);
+        
+        
             
         if (ADCIsConversionFinished() == 1) {
             ADCClearConversionFinishedFlag();

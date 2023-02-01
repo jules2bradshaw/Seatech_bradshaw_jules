@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Robot_Masinski.X
+PROJECTNAME=Robot_Bradshaw.X
 
 # Active Configuration
 DEFAULTCONF=default

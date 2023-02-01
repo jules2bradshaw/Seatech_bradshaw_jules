@@ -35,7 +35,6 @@ namespace RobotInterfaceBradshawJules
             serialPort1.DataReceived += serialPort1_DataReceived;
             serialPort1.Open();
             byteListeReceived();
-
             Robot robot = new Robot();
 
             timerAffichage= new DispatcherTimer();
@@ -48,21 +47,27 @@ namespace RobotInterfaceBradshawJules
 
         private void TimerAffichage_Tick(object sender, EventArgs e)
         {
-            if (robot.receivedText != "")
+           // if (robot.receivedText != "")
+           // {
+                //Reception.Text += "Reçu Robot : " + robot.receivedText + "\n";
+                //robot.receivedText = "";
+               // Queue.enqueue(number);
+           // }
+           while (byteListReceived.count != 0)
             {
-                Reception.Text += "Reçu Robot : " + robot.receivedText + "\n";
-                robot.receivedText = "";
-                Queue.enqueue(number);
+                var c = byteListReceived.Dequeue();
+                Reception.Text += "0x" + c.ToString("X2") + " ";
             }
         }
 
         public void serialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
-            robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
-            Console.WriteLine("\nContents of the first copy:");
-            foreach (byte number in byteListReceived)
+            //Robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            
+            //Console.WriteLine("\nContents of the first copy:");
+            for  (int i = 0; i<e.Data.Length; i++)
             {
-                Console.WriteLine(number);
+                byteListReceived.Enqueue(e.Data[i]);
             }
         }
 
@@ -107,7 +112,7 @@ namespace RobotInterfaceBradshawJules
             //Reception.Text += "Reçu : " + textBoxEmission.Text + "\n";
             serialPort1.WriteLine(textBoxEmission.Text);
             textBoxEmission.Text = "";
-            byteToString();
+           
         }
 
     }

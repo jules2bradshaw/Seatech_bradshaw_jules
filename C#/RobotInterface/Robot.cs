@@ -8,14 +8,13 @@ namespace RobotInterfaceBradshawJules
 {
     public class Robot
     {
-        Queue<byte> byteListReceived = new Queue<byte>();
         public string receivedText = "" ;
         public float distancetelementreDroit;
         public float distancetelementreCentre;
         public float distancetelementreGauche;
         public Robot()
         {
-
+          Queue<byte>  byteListReceived = new Queue<byte>();
         }
     }
 }
