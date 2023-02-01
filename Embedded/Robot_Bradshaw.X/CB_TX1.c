@@ -66,5 +66,7 @@ int CB_TX1_GetRemainingSize(void) {
     //return size of remaining size in circular buffer
     int remainingSize;
     remainingSize = cbTx1Tail - cbTx1Head;
-    return remainingSize;
+    return remainingSize;  
+    
+    //ca fonctionne
 }
