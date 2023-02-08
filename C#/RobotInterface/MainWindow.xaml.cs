@@ -31,7 +31,7 @@ namespace RobotInterfaceBradshawJules
         public MainWindow()
         {
             InitializeComponent();
-            serialPort1= new ReliableSerialPort("COM4", 115200, Parity.None, 8, StopBits.One );
+            serialPort1= new ReliableSerialPort("COM15", 115200, Parity.None, 8, StopBits.One );
             serialPort1.DataReceived += serialPort1_DataReceived;
             serialPort1.Open();
             byteListeReceived();
@@ -41,7 +41,9 @@ namespace RobotInterfaceBradshawJules
             timerAffichage.Interval = new TimeSpan(0, 0, 0, 0, 100);
             timerAffichage.Tick += TimerAffichage_Tick; ;
             timerAffichage.Start();
-
+           // byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload);
+           // void UartEncodeAndSendMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload);
+           // byte[] array = Encoding.ASCII.GetBytes(s);
 
         }
 
@@ -98,6 +100,8 @@ namespace RobotInterfaceBradshawJules
                 byteList[i] = (byte)(2 * i);
             }
             serialPort1.Write(byteList, 0, byteList.Length);
+            //byte CalculateChecksum(int msgFunction,
+            //int msgPayloadLength, byte[] msgPayload);
         }
 
         private void textBoxEmission_KeyUp(object sender, KeyEventArgs e)
