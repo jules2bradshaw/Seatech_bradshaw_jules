@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RobotInterfaceYannMasinski.Properties
+namespace RobotInterfaceJulesBradshaw.Properties
 {
 
 

@@ -1,7 +1,7 @@
-﻿<Application x:Class="RobotInterfaceYannMasinski.App"
+﻿<Application x:Class="RobotInterfaceJulesBradshaw.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:RobotInterfaceYannMasinski"
+             xmlns:local="clr-namespace:RobotInterfaceJulesBradshaw"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

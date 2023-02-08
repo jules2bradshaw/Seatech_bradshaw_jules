@@ -11,6 +11,8 @@
 #include "Robot.h"
 #include "main.h"
 #include "UART.h"
+#include "CB_RX11.h"
+#include "CB_TX1.h"
 
 int main(void) {
     /***************************************************************************************************/
@@ -47,7 +49,6 @@ int main(void) {
             unsigned char c = CB_RX1_Get();
             SendMessage(&c, 1);
         }
-        __delay32(1000);
 
 
         if (ADCIsConversionFinished() == 1) {
