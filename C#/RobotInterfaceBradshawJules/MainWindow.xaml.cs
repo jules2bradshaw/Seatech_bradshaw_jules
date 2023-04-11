@@ -228,8 +228,8 @@ namespace RobotInterfaceJulesBradshaw
                     break;
                 case 0x0040:
                     {
-                        MG.Content += "moteur gauche=" + (byte)(1);
-                        MD.Content += "moteur droit=" + (byte)(2);
+                        MG.Content += "moteur gauche=" + Encoding.ASCII.GetString(msgPayload); ;
+                        MD.Content += "moteur droit=" + Encoding.ASCII.GetString(msgPayload); ;
                     }
                     break;
             }
