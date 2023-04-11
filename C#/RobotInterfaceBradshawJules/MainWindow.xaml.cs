@@ -221,10 +221,16 @@ namespace RobotInterfaceJulesBradshaw
                 case 0x0030:
                     for(int i=0; i<3; i++)
                     {
-
+                        CG.Content += "IR_gauche =" + (byte)(1);
+                        CC.Content += "IR_centre =" + (byte)(2);
+                        CD.Content += "IR_droit =" + (byte)(3);
                     }
                     break;
                 case 0x0040:
+                    {
+                        MG.Content += "moteur gauche=" + (byte)(1);
+                        MD.Content += "moteur droit=" + (byte)(2);
+                    }
                     break;
             }
         }

@@ -39,15 +39,15 @@
             </GroupBox>
             <GroupBox Header="Télémètre IR" MinWidth="100">
                 <StackPanel Orientation="Vertical">
-                    <Label Content="IR gauche : "/>
-                    <Label Content="IR centre : "/>
-                    <Label Content="IR droite : "/>
+                    <Label Content="IR gauche : " x:Name="CG"/>
+                    <Label Content="IR centre : " x:Name="CC"/>
+                    <Label Content="IR droite : " x:Name="CD"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Moteurs" MinWidth="200">
                 <StackPanel Orientation="Vertical">
-                    <Label Content="moteur gauche : "/>
-                    <Label Content="moteur droit : "/>
+                    <Label Content="moteur gauche : " x:Name="MG"/>
+                    <Label Content="moteur droit : " x:Name="MD"/>
                    
                 </StackPanel>
 
