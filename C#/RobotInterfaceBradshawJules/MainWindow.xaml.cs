@@ -110,7 +110,7 @@ namespace RobotInterfaceJulesBradshaw
 
             string s = "Bonjour";
             byte[] array = Encoding.ASCII.GetBytes(s);
-            UartEncodeAndSendMessage(0x0080, array.Length, array);
+            UartEncodeAndSendMessage(0x0020, array.Length, array);
         }
 
         private void textBoxEmission_KeyUp(object sender, KeyEventArgs e)
@@ -122,7 +122,7 @@ namespace RobotInterfaceJulesBradshaw
         }
         private void SendMessage()
         {
-            //Reception.Text += "Reçu : " + textBoxEmission.Text + "\n";
+            // Reception.Text += "";
             serialPort1.WriteLine(textBoxEmission.Text);
             string s = textBoxEmission.Text;
             byte[] array = Encoding.ASCII.GetBytes(s);
@@ -184,8 +184,24 @@ namespace RobotInterfaceJulesBradshaw
         byte[] msgDecodedPayload;
         int msgDecodedPayloadIndex = 0;
         byte receivedChecksum;
-        
 
+        private void ProcessDecodeMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload)
+        {
+            switch(msgFunction)
+            {
+                case 0x0080:
+                    Reception.Text += "\n Message reçu : " + Encoding.ASCII.GetString(msgPayload);
+                    break;
+                case 0x0020:
+                    if (){
+
+                    }
+                    break;
+                case 0x0030:
+                    break;
+            }
+        }
+        
         private void DecodeMessage(byte c)
         {
             switch (rcvState)
@@ -241,7 +257,7 @@ namespace RobotInterfaceJulesBradshaw
                         //Reception.Text += Encoding.ASCII.GetString(msgDecodedPayload);
                         //Reception.Text += receivedChecksum.ToString("X4");
 
-                        ProcessDecodeMessage();
+                        ProcessDecodeMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                     }
                     else
                         Reception.Text += "erreur checksum incorrect";
@@ -250,8 +266,12 @@ namespace RobotInterfaceJulesBradshaw
                 default:
                     rcvState = StateReception.Waiting;
                     break;
+        
             }
+
+            
         }
+
 
 
     }

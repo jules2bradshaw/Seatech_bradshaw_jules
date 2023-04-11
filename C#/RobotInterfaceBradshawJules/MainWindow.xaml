@@ -8,11 +8,9 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-
+            <RowDefinition Height="2*" />
             <RowDefinition Height="30"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
 
@@ -29,7 +27,32 @@
         </GroupBox>
         <Button x:Name="buttonEnvoyer" Content="Envoyer" Grid.Column="0" Margin="0" Grid.Row="1" Width="100" Click="buttonEnvoyer_Click" HorizontalAlignment="Center"/>
         <Button x:Name="buttonClear" Content="Clear" Grid.Column="1" Margin="0" Grid.Row="1" Width="100" Click="buttonClear_Click" HorizontalAlignment="Center"/>
-        <Button x:Name="buttonTest" Content="Test" Grid.Column="1" Margin="0" Grid.Row="3" Width="100" Click="buttonTest_Click" HorizontalAlignment="Center"/>
+        <Button x:Name="buttonTest" Content="Test" Grid.Column="0" Grid.ColumnSpan="2" Margin="0" Grid.Row="1" Width="100" Click="buttonTest_Click" HorizontalAlignment="Center"/>
 
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <GroupBox Header="Leds" MinWidth="100">
+                <StackPanel Orientation="Vertical">
+                    <CheckBox Content="Led 1" x:Name="checkboxLed1"/>
+                    <CheckBox Content="Led 2" x:Name="checkboxLed2"/>
+                    <CheckBox Content="Led 3" x:Name="checkboxLed3"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Télémètre IR" MinWidth="100">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="IR gauche : "/>
+                    <Label Content="IR centre : "/>
+                    <Label Content="IR droite : "/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Moteurs" MinWidth="200">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="moteur gauche : "/>
+                    <Label Content="moteur droit : "/>
+                   
+                </StackPanel>
+
+
+            </GroupBox>
+        </StackPanel>
     </Grid>
 </Window>
