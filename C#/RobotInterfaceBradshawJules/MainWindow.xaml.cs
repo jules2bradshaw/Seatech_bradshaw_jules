@@ -59,7 +59,8 @@ namespace RobotInterfaceJulesBradshaw
             while (byteListReceived.Count != 0)
             {
                 var c = byteListReceived.Dequeue();
-                Reception.Text += "0x" + c.ToString("X2") + " ";
+                DecodeMessage(c);
+                //Reception.Text += "0x" + c.ToString("X2") + " ";
             }
         }
 
@@ -123,6 +124,9 @@ namespace RobotInterfaceJulesBradshaw
         {
             //Reception.Text += "Reçu : " + textBoxEmission.Text + "\n";
             serialPort1.WriteLine(textBoxEmission.Text);
+            string s = textBoxEmission.Text;
+            byte[] array = Encoding.ASCII.GetBytes(s);
+            UartEncodeAndSendMessage(0x0080, array.Length, array);
             textBoxEmission.Text = "";
 
 
@@ -204,8 +208,16 @@ namespace RobotInterfaceJulesBradshaw
             break;
                 case StateReception.PayloadLengthLSB:
                     msgDecodedPayloadLength += c<<0;
-                    msgDecodedPayload = new byte[msgDecodedPayloadLength];
-                    rcvState = StateReception.Payload;
+                    if (msgDecodedPayloadLength == 0)
+                    {
+                        rcvState = StateReception.CheckSum;
+                    }
+                    else
+                    {
+                        msgDecodedPayload = new byte[msgDecodedPayloadLength];
+                        msgDecodedPayloadIndex = 0;
+                        rcvState = StateReception.Payload;
+                    }
             break;
                 case StateReception.Payload:
                     if (msgDecodedPayloadIndex < msgDecodedPayloadLength - 1)
@@ -222,13 +234,14 @@ namespace RobotInterfaceJulesBradshaw
                     receivedChecksum = c;
                     if (CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload) == receivedChecksum)
                     {
-                        Reception.Text += "0xFE";
-                        Reception.Text += msgDecodedFunction.ToString("X4");
-                        Reception.Text += msgDecodedPayloadLength.ToString("X4");
-                        Reception.Text += Encoding.ASCII.GetString(msgDecodedPayload);
-                        Reception.Text += receivedChecksum.ToString("X4");
+                        Console.WriteLine("C'est bon !");
+                        //Reception.Text += "0xFE";
+                        //Reception.Text += msgDecodedFunction.ToString("X4");
+                        //Reception.Text += msgDecodedPayloadLength.ToString("X4");
+                        //Reception.Text += Encoding.ASCII.GetString(msgDecodedPayload);
+                        //Reception.Text += receivedChecksum.ToString("X4");
 
-                        // ProcessDecodeMessage()
+                        ProcessDecodeMessage();
                     }
                     else
                         Reception.Text += "erreur checksum incorrect";
