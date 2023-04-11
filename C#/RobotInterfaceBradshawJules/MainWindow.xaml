@@ -32,9 +32,9 @@
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <GroupBox Header="Leds" MinWidth="100">
                 <StackPanel Orientation="Vertical">
-                    <CheckBox Content="Led 1" x:Name="checkboxLed1"/>
-                    <CheckBox Content="Led 2" x:Name="checkboxLed2"/>
-                    <CheckBox Content="Led 3" x:Name="checkboxLed3"/>
+                    <CheckBox Content="Led 1" IsEnabled="False" x:Name="checkboxLed1"/>
+                    <CheckBox Content="Led 2" IsEnabled="False" x:Name="checkboxLed2"/>
+                    <CheckBox Content="Led 3" IsEnabled="False" x:Name="checkboxLed3"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Télémètre IR" MinWidth="100">

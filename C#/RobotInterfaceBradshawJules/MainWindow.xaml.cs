@@ -193,11 +193,38 @@ namespace RobotInterfaceJulesBradshaw
                     Reception.Text += "\n Message reçu : " + Encoding.ASCII.GetString(msgPayload);
                     break;
                 case 0x0020:
-                    if (){
-
+                    if (msgPayload[0] == 1 & msgPayload[1] == 1)
+                    {
+                        checkboxLed1.IsChecked = true;
+                    }
+                    else
+                    {
+                        checkboxLed1.IsChecked = false;
+                    }
+                    if (msgPayload[0] == 2 & msgPayload[1] == 1)
+                    {
+                        checkboxLed2.IsChecked = true;
+                    }
+                    else
+                    {
+                        checkboxLed2.IsChecked = false;
+                    }
+                    if (msgPayload[0] == 3 & msgPayload[1] == 1)
+                    {
+                        checkboxLed3.IsChecked = true;
+                    }
+                    else
+                    {
+                        checkboxLed3.IsChecked = false;
                     }
                     break;
                 case 0x0030:
+                    for(int i=0; i<3; i++)
+                    {
+
+                    }
+                    break;
+                case 0x0040:
                     break;
             }
         }
