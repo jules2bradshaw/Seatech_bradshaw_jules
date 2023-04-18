@@ -13,6 +13,8 @@
 #include "UART.h"
 #include "CB_RX11.h"
 #include "CB_TX1.h"
+#include "UART_Protocol.h"
+
 
 int main(void) {
     /***************************************************************************************************/
@@ -44,12 +46,16 @@ int main(void) {
         //SendMessageDirect((unsigned char*) "Bonjour", 7);
         //  __delay32(40000000);
 
-        int i;
-        for (i = 0; i < CB_RX1_GetDataSize(); i++) {
-            unsigned char c = CB_RX1_Get();
-            SendMessage(&c, 1);
-        }
-        //__delay32(1000);
+//        int i;
+//        for (i = 0; i < CB_RX1_GetDataSize(); i++) {
+//            unsigned char c = CB_RX1_Get();
+//            SendMessage(&c, 1);
+        
+        unsigned char payload[] = {'B', 'o','n','j','o', 'u', 'r'};
+        UartEncodeAndSendMessage(0x0080 , 7 , payload);
+        __delay32(40000000);
+        //}
+        //__delay32(40000000000);
 
 
         if (ADCIsConversionFinished() == 1) {

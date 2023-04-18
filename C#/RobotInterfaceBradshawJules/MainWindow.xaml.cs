@@ -110,7 +110,10 @@ namespace RobotInterfaceJulesBradshaw
 
             string s = "Bonjour";
             byte[] array = Encoding.ASCII.GetBytes(s);
-            UartEncodeAndSendMessage(0x0020, array.Length, array);
+            UartEncodeAndSendMessage(0x0080, array.Length, array);
+
+            byte[] payload = new byte[] { 45, 54 };
+            UartEncodeAndSendMessage(0x0040, payload.Length, payload);
         }
 
         private void textBoxEmission_KeyUp(object sender, KeyEventArgs e)
@@ -185,14 +188,22 @@ namespace RobotInterfaceJulesBradshaw
         int msgDecodedPayloadIndex = 0;
         byte receivedChecksum;
 
+        public enum typemessage
+        {
+            Texte=0x0080,
+            Leds=0x0020,
+            TelemetreIR=0x0030,
+            Vitesse=0x0040,
+        }
+
         private void ProcessDecodeMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload)
         {
-            switch(msgFunction)
+            switch((typemessage)msgFunction)
             {
-                case 0x0080:
+                case typemessage.Texte:
                     Reception.Text += "\n Message reçu : " + Encoding.ASCII.GetString(msgPayload);
                     break;
-                case 0x0020:
+                case typemessage.Leds:
                     if (msgPayload[0] == 1 & msgPayload[1] == 1)
                     {
                         checkboxLed1.IsChecked = true;
@@ -218,18 +229,18 @@ namespace RobotInterfaceJulesBradshaw
                         checkboxLed3.IsChecked = false;
                     }
                     break;
-                case 0x0030:
+                case typemessage.TelemetreIR:
                     for(int i=0; i<3; i++)
                     {
-                        CG.Content += "IR_gauche =" + (byte)(1);
-                        CC.Content += "IR_centre =" + (byte)(2);
-                        CD.Content += "IR_droit =" + (byte)(3);
+                        CG.Content = "IR_gauche =" + msgDecodedPayload[0];
+                        CC.Content = "IR_centre =" + msgDecodedPayload[1];
+                        CD.Content = "IR_droit =" + msgDecodedPayload[2];
                     }
                     break;
-                case 0x0040:
+                case typemessage.Vitesse:
                     {
-                        MG.Content += "moteur gauche=" + Encoding.ASCII.GetString(msgPayload); ;
-                        MD.Content += "moteur droit=" + Encoding.ASCII.GetString(msgPayload); ;
+                        MG.Content = "moteur gauche=" + msgDecodedPayload[0] + "%" ; 
+                        MD.Content = "moteur droit=" + msgDecodedPayload[1] + "%" ; 
                     }
                     break;
             }
