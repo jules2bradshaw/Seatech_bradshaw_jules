@@ -58,7 +58,7 @@ unsigned char CB_TX1_IsTransmitting(void) {
 int CB_TX1_GetDataSize(void) {
     //return size of data stored in circular buffer
     int dataSize;
-    if (cbTx1Tail < cbTx1Head) {
+    if (cbTx1Head >= cbTx1Tail) {
         dataSize = (cbTx1Head - cbTx1Tail);
 
     } else {
