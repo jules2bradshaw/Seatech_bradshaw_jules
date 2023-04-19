@@ -38,7 +38,7 @@ int msgPayloadLength, unsigned char* msgPayload)
             }
 
             message[pos++] = UartCalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
-            SendMessage(message,msgPayloadLength);
+            SendMessage(message,pos);
             //SendMessage();
 
 }

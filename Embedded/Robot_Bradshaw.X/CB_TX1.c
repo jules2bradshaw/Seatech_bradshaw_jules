@@ -58,15 +58,19 @@ unsigned char CB_TX1_IsTransmitting(void) {
 int CB_TX1_GetDataSize(void) {
     //return size of data stored in circular buffer
     int dataSize;
-    dataSize = CBTX1_BUFFER_SIZE - (cbTx1Tail - cbTx1Head);
+    if (cbTx1Tail < cbTx1Head) {
+        dataSize = (cbTx1Head - cbTx1Tail);
+
+    } else {
+        dataSize = CBTX1_BUFFER_SIZE - (cbTx1Tail - cbTx1Head);
+
+    }
     return dataSize;
 }
 
 int CB_TX1_GetRemainingSize(void) {
     //return size of remaining size in circular buffer
     int remainingSize;
-    remainingSize = cbTx1Tail - cbTx1Head;
-    return remainingSize;  
-    
-    //ca fonctionne
+    remainingSize = CBTX1_BUFFER_SIZE - CB_TX1_GetDataSize();
+    return remainingSize;
 }

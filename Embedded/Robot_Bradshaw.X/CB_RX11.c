@@ -52,13 +52,17 @@ void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
 int CB_RX1_GetDataSize(void) {
     //return size of data stored in circular buffer
     int dataSize;
+    if (cbRx1Tail < cbRx1Head){
+        dataSize=(cbRx1Head - cbRx1Tail);
+    }
+    else{
     dataSize = CBRX1_BUFFER_SIZE - (cbRx1Tail - cbRx1Head);
+    }
     return dataSize;
 }
 
 int CB_RX1_GetRemainingSize(void) {
-    //return size of remaining size in circular buffer
     int remainingSize;
-    remainingSize = cbRx1Tail - cbRx1Head;
+    remainingSize=CBRX1_BUFFER_SIZE-CB_RX1_GetDataSize();
     return remainingSize;
 }
