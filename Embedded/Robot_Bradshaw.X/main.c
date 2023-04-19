@@ -51,9 +51,9 @@ int main(void) {
 //            unsigned char c = CB_RX1_Get();
 //            SendMessage(&c, 1);
         
-        unsigned char payload[] = {'B', 'o','n','j','o', 'u', 'r'};
-        UartEncodeAndSendMessage(0x0080 , 7 , payload);
-        __delay32(40000000);
+//        unsigned char payload[] = {'B', 'o','n','j','o', 'u', 'r'};
+//        UartEncodeAndSendMessage(0x0080 , 7 , payload);
+        //__delay32(40000000);
         //}
         //__delay32(40000000000);
 
@@ -72,7 +72,8 @@ int main(void) {
             robotState.distanceTelemetreExtremGauche = 34 / volts - 5;
             volts = ((float) result[0])*3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtremDroit = 34 / volts - 5;
-
+            unsigned char payload1[]={robotState.distanceTelemetreDroit,  robotState.distanceTelemetreCentre, robotState.distanceTelemetreGauche};
+            UartEncodeAndSendMessage(0x0030 , 3 , payload1);
 
             if (robotState.distanceTelemetreDroit < 30 || robotState.distanceTelemetreExtremDroit < 30) LED_ORANGE = 1;
             else LED_ORANGE = 0;
@@ -82,8 +83,14 @@ int main(void) {
 
             if (robotState.distanceTelemetreGauche < 30 || robotState.distanceTelemetreExtremGauche < 30) LED_BLANCHE = 1;
             else LED_BLANCHE = 0;
-
-
+            unsigned char payload2[]={LED_ORANGE,LED_BLEUE,LED_BLANCHE};
+            UartEncodeAndSendMessage(0x0020 , 3 , payload2);
+            
+            
+            
+            unsigned char payload3[]={stateRobot,(timestamp << 24),(timestamp << 16),(timestamp << 8),(timestamp)};
+            UartEncodeAndSendMessage(0x0050 , 5 , payload3);
+            
         }
     } // fin main
 }
@@ -261,5 +268,6 @@ else if (robotState.distanceTelemetreDroit > disevitement &&
     //Si l?on n?est pas dans la transition de l?étape en cours
     if (nextStateRobot != stateRobot - 1) {
         stateRobot = nextStateRobot;
+        stateRobot = 1;
     }
 }

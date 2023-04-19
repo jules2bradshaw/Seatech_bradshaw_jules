@@ -53,6 +53,7 @@
 
 
             </GroupBox>
+            
         </StackPanel>
     </Grid>
 </Window>

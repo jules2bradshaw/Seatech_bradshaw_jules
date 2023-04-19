@@ -43,11 +43,11 @@ int msgPayloadLength, unsigned char* msgPayload)
 
 }
 
-//int msgDecodedFunction = 0;
-//int msgDecodedPayloadLength = 0;
-//unsigned char msgDecodedPayload[128];
-//int msgDecodedPayloadIndex = 0;
-//
+int msgDecodedFunction = 0;
+int msgDecodedPayloadLength = 0;
+unsigned char msgDecodedPayload[128];
+int msgDecodedPayloadIndex = 0;
+
 //void UartDecodeMessage(unsigned char c)
 //{
 ////Fonction prenant en entrée un octet et servant à reconstituer les trames
